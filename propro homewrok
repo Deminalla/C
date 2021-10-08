@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+int main()
+{
+    int sk=1;
+    int i=0;
+    while (sk!=0){
+        scanf("%d", &sk);
+        if (sk==0){
+            break;
+        }
+        if (sk<0){
+            printf ("%d", sk);
+            printf("bloga ivestis\n");
+        goto over;}
+        if(sk==2 || sk==3 || sk==5){
+            printf ("%d", sk);
+            printf(" pirminis\n");
+        }
+        if (sk!=1 && sk%2!=0 && sk%3!=0 && sk%5!=0){
+            printf ("%d", sk);
+            printf(" pirminis\n");
+        }
+        over:
+            i++; //cia tam kad goto veiktu, nes raso kad negalima goto deti i ciklo pabaiga
+    }
+
+    return 0;
+}
+//vartotojas ivedineja skaicius (sveikieji)
+//gali spausti enter ar deti tarpus or whatever
+//rasyt kad bloga ivestis, kurie yra realieji skaičiai, neigiami skaičiai, žodžiai kur yra raidės, visokie ženklai, turėtų būti atmetami kaip netinkami
+//0 yra programos pabaiga
+//ar tas skaicius pirminis (jei taip, taip ir rasyt)
+//jeigu ne pirminis, tai atspausdint asrciausiai esanti pirmini, jeigu vienodai arti tai abu atspausdinti
+//negalima masyvu
+//negalima papildomo failo
+//jeigu vidury ivedimo yra 0 tai ten ir baigti
+
+//1) jei norite, galite naudotis biblioteka ctype.h, skirtukams tikrinti
+//2) prieš darant, pasižiūrėkite į funkcijos scanf galimybes (o būtent, į scanset) bei į funkciją (jei reikia) ungetc - abi gyvena stdio.h
+
+//2 3 5   2 pirminis  3 pirminis    5 pirminis
+//5 a 9   5 pirminis  bloga ivestis   9 ne pirminis, artimiausi 7 ir 11
