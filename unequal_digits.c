@@ -29,8 +29,8 @@ int main()
                 nelyg_nariai++;
             }
         }
-        else while (getchar()!='\n'); //in case a letter or words are scanned, this cycle will get rid of all the symbols until none are left
-    }
+        else while (getchar()!='\n'); //in case a letter or words are scanned, this cycle will get rid of all the symbols until the end of the line
+    }   //if we input elements on the same line with spaces (4 asd gred 56), then we'd need it to ignore symbols until a spacebar so getchar()!=' '
     printf("Nariu, kuriu skaitmenu suma nelygine, skaicius: %d", nelyg_nariai);
     return 0;
 }
