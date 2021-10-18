@@ -111,7 +111,7 @@ void isvedimas(int eilut, int N, int sveikieji[], int maximum[], int minimum[], 
         {
             printf("%d eilutes didziausias skaicius yra %d, esantis %d", eilut, maximum[eilut], stulp_max[eilut][0]);
             i = 1;
-                while (stulp_max[eilut][i]) //kol kart_max_st nera 0, o jeigu nebuvo pasikartojanciu, tai while isvis nesuveiks ir einam toliau prie minimumu
+                while (stulp_max[eilut][i]) //kol yra pasikartojanciu maximumu, o jeigu nebuvo pasikartojanciu, tai while isvis nesuveiks ir einam toliau prie minimumu
                 {
                     printf(", %d", stulp_max[eilut][i]);
                     i++;
