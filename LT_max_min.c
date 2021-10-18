@@ -1,4 +1,4 @@
-// LSP 2110527     denizaalijeva@gmail.com     2-os užduoties 5-tas variantas/numeris
+// LSP *****************     ***********.com     2-os užduoties 5-tas variantas/numeris
 #include <stdio.h>
 #include <ctype.h> //reikalingas del isspace
 void pozicija_max_min(int eilut, int stulp, int N, int skaicius[][N + 1], int stulp_max[][N+1], int stulp_min[][N+1], int maximum[], int minimum[], int sveikieji[]);
