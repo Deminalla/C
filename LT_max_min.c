@@ -10,17 +10,17 @@ int main()
     printf("Kokio dydzio lenteles norite: "); // N*N
     scanf("%d", &N);
     int skaicius[N + 1][N + 1], sveikieji[N + 1]; // kiek sveikuju buvo ivesta i viena eilute
-    int eilut, stulp, stulp_max[N + 1][N+1], stulp_min[N+1][N+1];                 // N-kiek yra eiluciu, 2-kad 0-intoje vietoje butu max o 1-oje min, kiekvienos eilutes max ir min stulpeliai
-    int minimum[N + 1], maximum[N + 1];                       // max and min in every line
-    int kartojasi_max, kartojasi_min;                         // ar kartojasi
+    int eilut, stulp;  
+    int minimum[N + 1], maximum[N + 1], stulp_max[N + 1][N+1], stulp_min[N+1][N+1];   // max and min in every line  //kiekvienoje eiluteje esantis max min stulpeliai
+    int kartojasi_max, kartojasi_min;   // ar kartojasi
     int i, j;
 
     for (eilut = 1; eilut <= N; eilut++)
     {
-        sveikieji[eilut] = 0;
+        sveikieji[eilut] = 0;   //cia tam, kad paskui zinot ar eiluteje buvo ivesta sveikuju ar visai jokiu nebuvo 
         for (stulp = 1; stulp <= N; stulp++)
         {
-            if (scanf("%d", &skaicius[eilut][stulp]) == 1 && isspace(getchar())) //jeigu tai sveikasis, sokam i funkcija
+            if (scanf("%d", &skaicius[eilut][stulp]) == 1 && isspace(getchar())) //tikrinam ar tai sveikasis, ir jei taip, sokam i funkcija
             {
                 pozicija_max_min(eilut, stulp, N, skaicius, stulp_max, stulp_min, maximum, minimum, sveikieji);
             }
@@ -38,13 +38,13 @@ void pozicija_max_min(int eilut, int stulp, int N, int skaicius[][N + 1], int st
     { 
         maximum[eilut] = skaicius[eilut][stulp];  // max ir min prilyginam pirmam ivestam skaiciui, kad paskui butu su kuo lyginti 
         minimum[eilut] = skaicius[eilut][stulp];
-        stulp_max[eilut][0] = stulp;          //max min pozicijos/stulpeliai eiluteje
+        stulp_max[eilut][0] = stulp;              //max min pozicijos/stulpeliai eiluteje
         stulp_min[eilut][0] = stulp;
     }
     else if (skaicius[eilut][stulp] > maximum[eilut])  //jeigu ivestas skaicius didesnis uz pries tai nustatyta maximuma
     {
         maximum[eilut] = skaicius[eilut][stulp];      //tai dabar yra naujas maximumas
-        stulp_max[eilut][0] = stulp;               //maximumo stulpelis eiluteje
+        stulp_max[eilut][0] = stulp;                 //maximumo stulpelis eiluteje
     }
     else if (skaicius[eilut][stulp] < minimum[eilut])
     {
@@ -74,7 +74,7 @@ void pasikartojanciu_paieska(int i, int j, int N, int kartojasi_max, int kartoja
             }
             if (kartojasi_max > 1)  //daugiau uz 1, nes bus iskaiciuota ir originalus maximumas, ai ziurim ar yra daugiau uz 1
             {
-                stulp_max[eilut][i] = stulp;
+                stulp_max[eilut][i] = stulp; //jeigu randam dar viena maximuma, tai irgi isaugojam jo stulpeli i-tojoje pozicijoje
                 i++;
                 stulp_max[eilut][i] = 0; //nes isvedime ves iki tol, kol bus 0, tai reikia sustabdyti 
                 kartojasi_max--;
@@ -111,7 +111,7 @@ void isvedimas(int eilut, int N, int sveikieji[], int maximum[], int minimum[], 
         {
             printf("%d eilutes didziausias skaicius yra %d, esantis %d", eilut, maximum[eilut], stulp_max[eilut][0]);
             i = 1;
-                while (stulp_max[eilut][i]) //kol kart_max_st nera 0
+                while (stulp_max[eilut][i]) //kol kart_max_st nera 0, o jeigu nebuvo pasikartojanciu, tai while isvis nesuveiks ir einam toliau prie minimumu
                 {
                     printf(", %d", stulp_max[eilut][i]);
                     i++;
