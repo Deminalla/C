@@ -1,3 +1,4 @@
+//the things scanf can do
 #include <stdio.h>
 int main(){
     char str1[256] = {0}; //visos reiksmes bus (null), ju neatspausdins, nebent specifiskai prasyisim
