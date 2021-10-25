@@ -1,70 +1,86 @@
-// LSP *****************     ***********.com     2-os užduoties 5-tas variantas/numeris
+// TASK
 #include <stdio.h>
-#include <ctype.h> //reikalingas del isspace
-void pozicija_max_min(int eilut, int stulp, int N, int skaicius[][N + 1], int stulp_max[][N+1], int stulp_min[][N+1], int maximum[], int minimum[], int sveikieji[]);
+#include <stdlib.h>
+#include <ctype.h>  //for isspace
+void validacija(int eilut, int stulp, int N, int skaicius[][N + 1], int sveikieji[]);
+void pozicija_max_min(int eilut, int stulp, int N, int skaicius[][N + 1], int stulp_max[][N + 1], int stulp_min[][N + 1], int maximum[], int minimum[]);
 void pasikartojanciu_paieska(int i, int j, int N, int kartojasi_max, int kartojasi_min, int stulp_max[][N + 1], int stulp_min[][N + 1], int eilut, int stulp, int maximum[], int minimum[], int skaicius[][N + 1]);
-void isvedimas(int eilut, int N, int sveikieji[], int maximum[], int minimum[], int i, int stulp_max[][N+1], int stulp_min[][N+1]);
+void isvedimas(int eilut, int N, int maximum[], int minimum[], int i, int stulp_max[][N + 1], int stulp_min[][N + 1]);
 int main()
 {
     int N;
     printf("Kokio dydzio lenteles norite: "); // N*N
     scanf("%d", &N);
     int skaicius[N + 1][N + 1], sveikieji[N + 1]; // kiek sveikuju buvo ivesta i viena eilute
-    int eilut, stulp;  
-    int minimum[N + 1], maximum[N + 1], stulp_max[N + 1][N+1], stulp_min[N+1][N+1];   // max and min in every line  //kiekvienoje eiluteje esantis max min stulpeliai
-    int kartojasi_max, kartojasi_min;   // ar kartojasi
+    int eilut, stulp;
+    int minimum[N + 1], maximum[N + 1], stulp_max[N + 1][N + 1], stulp_min[N + 1][N + 1]; // max and min in every line and their positions
+    int kartojasi_max, kartojasi_min;
     int i, j;
-
+    printf("Iveskite %d eilutes, kuriose butu %d sveikieji skaiciai:\n", N, N); 
     for (eilut = 1; eilut <= N; eilut++)
     {
-        sveikieji[eilut] = 0;   //cia tam, kad paskui zinot ar eiluteje buvo ivesta sveikuju ar visai jokiu nebuvo 
-        for (stulp = 1; stulp <= N; stulp++)
+        validacija(eilut, stulp, N, skaicius, sveikieji);
+        if (sveikieji[eilut] < N)
         {
-            if (scanf("%d", &skaicius[eilut][stulp]) == 1 && isspace(getchar())) //tikrinam ar tai sveikasis, ir jei taip, sokam i funkcija
-            {
-                pozicija_max_min(eilut, stulp, N, skaicius, stulp_max, stulp_min, maximum, minimum, sveikieji);
-            }
-            else //jeigu kazkokie simboliai ar dar kazkas
-                while (!isspace(getchar())); // imti simbolius, kol nera tarpas arba nauja eilute, iki non-white space
+            printf("Netinkami duomenys, is naujo iveskite sia eilute: ");
+            eilut--;
         }
+        else
+            pozicija_max_min(eilut, stulp, N, skaicius, stulp_max, stulp_min, maximum, minimum);
     }
-    pasikartojanciu_paieska(i, j, N, kartojasi_max, kartojasi_min, stulp_max, stulp_min, eilut, stulp, maximum, minimum, skaicius); //ieskom kuriose stulepiuose yra pasikartojasntys ir ar isvis pasikartoja max min
-    isvedimas(eilut, N, sveikieji, maximum, minimum, i, stulp_max, stulp_min);
+    pasikartojanciu_paieska(i, j, N, kartojasi_max, kartojasi_min, stulp_max, stulp_min, eilut, stulp, maximum, minimum, skaicius);
+    isvedimas(eilut, N, maximum, minimum, i, stulp_max, stulp_min);
     return 0;
 }
-void pozicija_max_min(int eilut, int stulp, int N, int skaicius[][N + 1], int stulp_max[][N+1], int stulp_min[][N+1], int maximum[], int minimum[], int sveikieji[])
+void validacija(int eilut, int stulp, int N, int skaicius[][N + 1], int sveikieji[])
 {
-    if (sveikieji[eilut] == 0)
-    { 
-        maximum[eilut] = skaicius[eilut][stulp];  // max ir min prilyginam pirmam ivestam skaiciui, kad paskui butu su kuo lyginti 
-        minimum[eilut] = skaicius[eilut][stulp];
-        stulp_max[eilut][0] = stulp;              //max min pozicijos/stulpeliai eiluteje
-        stulp_min[eilut][0] = stulp;
-    }
-    else if (skaicius[eilut][stulp] > maximum[eilut])  //jeigu ivestas skaicius didesnis uz pries tai nustatyta maximuma
+    sveikieji[eilut] = 0; //cia tam, kad paskui zinot ar eiluteje buvo ivesta sveikuju ar visai jokiu nebuvo
+    for (stulp = 1; stulp <= N; stulp++)
     {
-        maximum[eilut] = skaicius[eilut][stulp];      //tai dabar yra naujas maximumas
-        stulp_max[eilut][0] = stulp;                 //maximumo stulpelis eiluteje
+        if (scanf("%d", &skaicius[eilut][stulp]) == 1 && isspace(getchar()))
+        {
+            sveikieji[eilut]++;
+        }
+        else
+            while (!isspace(getchar())); // imti simbolius, kol nera tarpas arba nauja eilute, iki non-white space
     }
-    else if (skaicius[eilut][stulp] < minimum[eilut])
-    {
-        minimum[eilut] = skaicius[eilut][stulp];
-        stulp_min[eilut][0] = stulp;
-    }
-    sveikieji[eilut]++;  //nu ir didinam ivestu sveikuju kieki, cia ateiciai, kad zinot, jog isvis yra eiluteje sveikasis ar ne
 }
-void pasikartojanciu_paieska(int i, int j, int N, int kartojasi_max, int kartojasi_min, int stulp_max[][N + 1], int stulp_min[][N + 1], int eilut, int stulp, int maximum[], int minimum[], int skaicius[][N + 1]){
+void pozicija_max_min(int eilut, int stulp, int N, int skaicius[][N + 1], int stulp_max[][N + 1], int stulp_min[][N + 1], int maximum[], int minimum[])
+{
+    for (stulp = 1; stulp <= N; stulp++) // max ir min prilyginam pirmam ivestam skaiciui, kad paskui butu su kuo lyginti 
+    {
+        if (stulp == 1)
+        {
+            maximum[eilut] = skaicius[eilut][stulp];
+            minimum[eilut] = skaicius[eilut][stulp];
+            stulp_max[eilut][0] = stulp;
+            stulp_min[eilut][0] = stulp;
+        }
+        else if (skaicius[eilut][stulp] > maximum[eilut]) 
+        {
+            maximum[eilut] = skaicius[eilut][stulp];
+            stulp_max[eilut][0] = stulp;
+        }
+        else if (skaicius[eilut][stulp] < minimum[eilut])
+        {
+            minimum[eilut] = skaicius[eilut][stulp];
+            stulp_min[eilut][0] = stulp;
+        }
+    }
+}
+void pasikartojanciu_paieska(int i, int j, int N, int kartojasi_max, int kartojasi_min, int stulp_max[][N + 1], int stulp_min[][N + 1], int eilut, int stulp, int maximum[], int minimum[], int skaicius[][N + 1])
+{
     for (eilut = 1; eilut <= N; eilut++)
     {
         i = 1;
         j = 1;
-        kartojasi_max = 0; // ar jis kartojasi ar ne
+        kartojasi_max = 0;  // ar jis kartojasi ar ne
         kartojasi_min = 0;
         stulp_max[eilut][i] = 0; // kuriame stulpelyje yra pasikartojantis
         stulp_min[eilut][j] = 0;
         for (stulp = 1; stulp <= N; stulp++)
         {
-            if (maximum[eilut] == skaicius[eilut][stulp])
+            if (maximum[eilut] == skaicius[eilut][stulp]) 
             {
                 kartojasi_max++;
             }
@@ -72,57 +88,45 @@ void pasikartojanciu_paieska(int i, int j, int N, int kartojasi_max, int kartoja
             {
                 kartojasi_min++;
             }
-            if (kartojasi_max > 1)  //daugiau uz 1, nes bus iskaiciuota ir originalus maximumas, ai ziurim ar yra daugiau uz 1
+            if (kartojasi_max > i) //daugiau uz i (is pradziu 1), nes bus iskaiciuota ir originalus maximumas, ai ziurim ar yra daugiau uz 1
             {
                 stulp_max[eilut][i] = stulp; //jeigu randam dar viena maximuma, tai irgi isaugojam jo stulpeli i-tojoje pozicijoje
                 i++;
-                stulp_max[eilut][i] = 0; //nes isvedime ves iki tol, kol bus 0, tai reikia sustabdyti 
-                kartojasi_max--;
+                stulp_max[eilut][i] = 0; //nes isvedime ves iki tol, kol bus 0, tai kad nesuktu papildomo ciklo 
             }
-            if (kartojasi_min > 1)
+            if (kartojasi_min > j)
             {
                 stulp_min[eilut][j] = stulp;
                 j++;
                 stulp_min[eilut][j] = 0;
-                kartojasi_min--;
             }
         }
     }
 }
-void isvedimas(int eilut, int N, int sveikieji[], int maximum[], int minimum[], int i, int stulp_max[][N+1], int stulp_min[][N+1])
+void isvedimas(int eilut, int N, int maximum[], int minimum[], int i, int stulp_max[][N + 1], int stulp_min[][N + 1])
 {
-    for (eilut = 1; eilut <= N; eilut++) //pravarom po kiekviena eilute
+    for (eilut = 1; eilut <= N; eilut++)
     {
-        if (sveikieji[eilut] == 0)  //jeigu sveikuju sk yra 0
+        if (maximum[eilut] == minimum[eilut])
         {
-            printf("%d eiluteje nera jokiu sveiku skaiciu\n", eilut);
+            printf("%d eiluteje nera didziausio ar maziausio, nes buvo ivesti tie patys skaiciai\n", eilut);
         }
-        else if (maximum[eilut] == minimum[eilut])
-        {
-            printf("%d eiluteje nera didziausio ar maziausio, nes ", eilut);
-            if (sveikieji[eilut] == 1)
-            {
-                printf("buvo ivestas tik 1 sveikas skaicius\n");
-            }
-            else
-                printf("buvo ivesti tie patys skaiciai\n");
-        }
-        else //tada be kitu pries tai minetu variantu liko paminet kur max min yra
+        else
         {
             printf("%d eilutes didziausias skaicius yra %d, esantis %d", eilut, maximum[eilut], stulp_max[eilut][0]);
             i = 1;
-                while (stulp_max[eilut][i]) //kol yra pasikartojanciu maximumu, o jeigu nebuvo pasikartojanciu, tai while isvis nesuveiks ir einam toliau prie minimumu
-                {
-                    printf(", %d", stulp_max[eilut][i]);
-                    i++;
-                }
+            while (stulp_max[eilut][i])
+            {
+                printf(", %d", stulp_max[eilut][i]);
+                i++;
+            }
             printf(" stulpelyje, o maziausias %d, esantis %d", minimum[eilut], stulp_min[eilut][0]);
             i = 1;
-                while (stulp_min[eilut][i])
-                {
-                    printf(", %d", stulp_min[eilut][i]);
-                    i++;
-                }
+            while (stulp_min[eilut][i])
+            {
+                printf(", %d", stulp_min[eilut][i]);
+                i++;
+            }
             printf(" stulpelyje\n");
         }
     }
