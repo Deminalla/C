@@ -1,5 +1,5 @@
 // Input integer N. Then input N*N integers which will create a table. Find the smallest and largest numbers in each row of the table
-// Print out the coordinates of these numbers (row, column) and the nubmers themselves
+// Print out the coordinates of these numbers (row, column) and the numbers themselves
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>  // for isspace                                                                                                                                                                                            //for isspace
