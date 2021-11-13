@@ -6,6 +6,7 @@
 //14:30 - 15:00     30 min cant write
 //12:40 - 13:30     50 min creating functions (reading/creating files work again why the fuck)
 //14:40 - 15:00     20 min still cant write to file
+//19:00 - 19:50     50 min trying to find how to download makefile and how it even looks
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> //for memset
@@ -116,5 +117,5 @@ void check_palindrome (int *i, int k, int l, int *first_position, int *last_posi
             (*i)=(*last_position)+1;
             (*first_position)=-1;  //so we can search for the next word
             (*last_position)=-1;
-            (*num_letters)=0;
+            (*num_letters)=0; //brackets are necessary because pointers are read from right to left
 }
