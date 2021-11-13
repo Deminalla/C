@@ -10,22 +10,19 @@
 #include <stdlib.h>
 #include <string.h> //for memset
 #include <ctype.h> //for isspace
-//void files(FILE *myfile, FILE *rezfile, char *my_filename, char *rez_filename);
-//void memory_files(char *my_filename, char *rez_filename, char *words, FILE *myfile, FILE *rezfile);
 void finding_begin_end (int i, int *first_position, int *last_position, int lenght, char *words);
 void check_palindrome (int *i, int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, FILE *rezfile);
 int main()
 {
     FILE *myfile, *rezfile;
     char *my_filename, *rez_filename;
-    char *words, *reverse;
+    char *words;
     int i, j, k, l; 
     int lenght;
     int first_position=-1, last_position=-1, last;
     int num_letters=0; //number of letters (skirtumas tarp l ir f) in a word if we count from 0
     int palindrome=0;
     
-    //memory_files(my_filename, rez_filename, words, myfile, rezfile);
     my_filename = (char*) calloc(100, sizeof(char));
     if (my_filename==NULL){
         printf("Memory could not be allocated\n");}
@@ -55,8 +52,7 @@ int main()
         printf ("Could not create file\n");
         goto second_file;
     }
-
-    
+    //else printf("yay\n");  this works
     while (fgets(words, 255, myfile)!=NULL){ //maximum 255 symbols in each line, do I need !=NULL ?
     lenght = strlen(words); 
     //printf ("%d", lenght); //how many symbols in each line
@@ -69,7 +65,6 @@ int main()
         //printf("f:%d l:%d ", first_position, last_position);
         if (first_position>=0 && last_position>=0){
         check_palindrome(&i, k, l, &first_position, &last_position, words, &num_letters, &palindrome, rezfile);
-        //printf("%d\n", palindrome);
         }
     }
     memset(words, 0, 255); //clear all elements from words, why wont free and calloc work again?
@@ -84,7 +79,6 @@ int main()
     free(words);
     return 0;
 }
-//void memory_files(char *my_filename, char *rez_filename, char *words, FILE *myfile, FILE *rezfile){}
 void finding_begin_end (int i, int *first_position, int *last_position, int lenght, char *words){
 if (*first_position<0){ //kol dar nera rasta zodzio pirmos raides vieta
         if (!isspace(*(words+i))){
@@ -111,7 +105,6 @@ void check_palindrome (int *i, int k, int l, int *first_position, int *last_posi
                 }
             if (*num_letters==(*last_position-*first_position+1)){
                 (*palindrome)++;
-                //printf("yay\n");
                 if ((*palindrome)==1){
                 fprintf(rezfile, "The palindromes that were found in the file: "); //fputs and not fputc because this is a string and not a single symbol
                 }
