@@ -110,7 +110,7 @@ void check_palindrome(int *i, int k, int l, int *first_position, int *last_posit
     k = *first_position;
     for (l = *last_position; l >= *first_position; l--)
     {
-        if (*(words + k) == *(words + l))
+        if (tolower(*(words + k)) == tolower(*(words + l)))
         {
             (*num_letters)++;
         }
