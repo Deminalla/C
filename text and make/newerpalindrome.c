@@ -18,7 +18,7 @@ int main()
     FILE *myfile, *rezfile;
     char *my_filename, *rez_filename;
     char *words;
-    int i, j, k, l;
+    int i, k, l;
     int lenght;
     int first_position = -1, last_position = -1, last;
     int num_letters = 0; // number of letters (skirtumas tarp l ir f) in a word if we count from 0
