@@ -7,6 +7,7 @@
 // 12:40 - 13:30     50 min creating functions (reading/creating files work again why the fuck)
 // 14:40 - 15:00     20 min still cant write to file
 // 19:00 - 19:50     50 min trying to find how to download makefile and how it even looks
+// ech šiaip kažkur 8 val (turbūt ir daugiau) bet tarkim buvo 7h
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> //for memset
@@ -20,7 +21,7 @@ int main()
     char *words;
     int i, k, l;
     int lenght;
-    int first_position = -1, last_position = -1, last;
+    int first_position = -1, last_position = -1;
     int num_letters = 0; // number of letters (skirtumas tarp l ir f) in a word if we count from 0
     int palindrome = 0;
 
@@ -110,7 +111,7 @@ void check_palindrome(int *i, int k, int l, int *first_position, int *last_posit
     k = *first_position;
     for (l = *last_position; l >= *first_position; l--)
     {
-        if (tolower(*(words + k)) == tolower(*(words + l)))
+        if (tolower(*(words + k)) == tolower(*(words + l))) // so capital and non capital letters are the same
         {
             (*num_letters)++;
         }
