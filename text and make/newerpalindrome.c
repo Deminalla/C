@@ -80,8 +80,6 @@ second_file:
     }
     fclose(myfile);
     fclose(rezfile);
-    free(myfile);
-    free(rezfile);
     free(words);
     return 0;
 }
