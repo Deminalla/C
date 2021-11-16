@@ -63,7 +63,7 @@ second_file:
                 check_palindrome(k, l, &first_position, &last_position, words, &num_letters, &palindrome, rezfile);
             }
         }
-        memset(words, 0, 255); // clear all elements from words, why wont free and calloc work again?
+        //memset(words, 0, 255); // clear all elements from words, why wont free and calloc work again?
     }
     if (!palindrome)
     {
