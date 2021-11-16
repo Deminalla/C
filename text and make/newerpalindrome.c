@@ -1,13 +1,4 @@
 // Parašyti funkciją, kuri randa ir atspausdina visus žodžius, kurie vienodai skaitomi iš pradžios ir iš galo
-// 14:00 - 15:00     1 hour for reading, creating file
-// 15:00 - 15:30     30 min for calloc and free
-// 16:00 - 16:45     45 min smth is fucking wrong and I dont understand, it won't do what it did before
-// 9:00 - 11:30      2,5 hours reverse each word in string until a spacebar and get files to open and be created
-// 14:30 - 15:00     30 min cant write
-// 12:40 - 13:30     50 min creating functions (reading/creating files work again why the fuck)
-// 14:40 - 15:00     20 min still cant write to file
-// 19:00 - 19:50     50 min trying to find how to download makefile and how it even looks
-// ech šiaip kažkur 8 val (turbūt ir daugiau) bet tarkim buvo 7h
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> //for memset
