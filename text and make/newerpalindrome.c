@@ -4,7 +4,8 @@
 #include <string.h> //for memset
 #include <ctype.h>  //for isspace
 void finding_begin_end(int i, int *first_position, int *last_position, int lenght, char *words);
-void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, FILE *rezfile);
+void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, int *p_exists, FILE *rezfile);
+void print_results (int k, int *first_position, int *last_position, char *words, int *palindrome, FILE *rezfile);
 int main()
 {
     FILE *myfile, *rezfile;
@@ -14,7 +15,7 @@ int main()
     int lenght;
     int first_position = -1, last_position = -1;
     int num_letters = 0; // number of letters (skirtumas tarp l ir f) in a word if we count from 0
-    int palindrome = 0;
+    int palindrome = 0, p_exists=0;
 
     my_filename = (char *)calloc(100, sizeof(char));
     if (my_filename == NULL)
@@ -60,7 +61,14 @@ second_file:
             finding_begin_end(i, &first_position, &last_position, lenght, words);
             if (first_position >= 0 && last_position >= 0)
             {
-                check_palindrome(k, l, &first_position, &last_position, words, &num_letters, &palindrome, rezfile);
+                check_palindrome(k, l, &first_position, &last_position, words, &num_letters, &palindrome, &p_exists, rezfile);
+                if (p_exists){
+                print_results (k, &first_position, &last_position, words, &palindrome, rezfile);
+                }
+                else {
+                    first_position = -1; 
+                    last_position = -1;
+                }
             }
         }
         //memset(words, 0, 255); // clear all elements from words, why wont free and calloc work again?
@@ -95,7 +103,7 @@ void finding_begin_end(int i, int *first_position, int *last_position, int lengh
         }
     }
 }
-void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, FILE *rezfile)
+void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, int *p_exists, FILE *rezfile)
 {
     k = *first_position;
     for (l = *last_position; l >= *first_position; l--)
@@ -106,20 +114,24 @@ void check_palindrome(int k, int l, int *first_position, int *last_position, cha
         }
         k++;
     }
-    if (*num_letters == (*last_position - *first_position + 1))
+    if (*num_letters == (*last_position - *first_position + 1)) 
     {
-        (*palindrome)++;
-        if ((*palindrome) == 1)
+        (*palindrome)++; 
+        (*p_exists) = 1;
+    }
+    else {(*p_exists) = 0;}
+    (*num_letters) = 0;
+}
+void print_results (int k, int *first_position, int *last_position, char *words, int *palindrome, FILE *rezfile){
+    if ((*palindrome) == 1) 
         {
-            fprintf(rezfile, "The palindromes that were found in the file: "); // fputs and not fputc because this is a string and not a single symbol
+            fprintf(rezfile, "The palindromes that were found in the file: "); 
         }
-        for (k = *first_position; k <= *last_position; k++)
+    for (k = *first_position; k <= *last_position; k++)
         {
-            fprintf(rezfile, "%c", (*(words + k))); // you need int for fputc(int _Ch, FILE *_File);
+            fprintf(rezfile, "%c", (*(words + k))); 
         }
         fprintf(rezfile, " ");
-    }
-    (*first_position) = -1; // so we can search for the next word
+    (*first_position) = -1; //so we can search for the next word, brackets are necessary because pointers are read from right to left
     (*last_position) = -1;
-    (*num_letters) = 0; // brackets are necessary because pointers are read from right to left
 }
