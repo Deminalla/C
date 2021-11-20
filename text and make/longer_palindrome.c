@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h> //for strlen
 #include <ctype.h>  //for isspace
+void files (FILE *myfile, char *my_filename, FILE *rezfile, char *rez_filename);
 void finding_begin_end(int i, int *first_position, int *last_position, int lenght, char *words);
 void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, int *p_exists, FILE *rezfile);
 void print_results(int k, int *first_position, int *last_position, char *words, int *palindrome, FILE *rezfile);
@@ -28,32 +29,16 @@ int main()
     {
         printf("Memory could not be allocated\n");
     }
-
-first_file:
-    printf("Please enter a .txt file name to analyze: ");
-    scanf("%s", my_filename);
-    myfile = fopen(my_filename, "r"); // open file for reading
-    if (myfile == NULL)
-    {
-        printf("Could not open file for reading\n");
-        goto first_file;
-    }
-second_file:
-    printf("Please enter a .txt file name to write the results to: ");
-    scanf("%s", rez_filename);
-    rezfile = fopen(rez_filename, "a"); // create file for writing at the eof each time
-    if (rezfile == NULL)
-    {
-        printf("Could not create file\n");
-        goto second_file;
-    }
-
     words = (char *)calloc(255, sizeof(char));
     if (words == NULL)
     {
         printf("Memory could not be allocated\n");
     }
 
+    files (myfile,  my_filename, rezfile, rez_filename);
+
+    myfile = fopen(my_filename, "r");
+    rezfile = fopen(rez_filename, "a");
     while (fgets(words, 255, myfile) != NULL) // reads 255 symbols each time
     {
         lenght = strlen(words);
@@ -89,6 +74,26 @@ second_file:
     free(rezfile);
     free(words);
     return 0;
+}
+void files (FILE *myfile, char *my_filename, FILE *rezfile, char *rez_filename){
+    printf("Please enter a .txt file name to analyze: ");
+    scanf("%s", my_filename);
+    myfile = fopen(my_filename, "r"); // open file for reading
+    while (myfile == NULL)
+    {
+        printf("Could not open file for reading, try again: ");
+        scanf("%s", my_filename);
+        myfile = fopen(my_filename, "r");
+    }
+    printf("Please enter a .txt file name to write the results to: ");
+    scanf("%s", rez_filename);
+    rezfile = fopen(rez_filename, "a"); // create file for writing at the eof each time
+    while (rezfile == NULL)
+    {
+        printf("Could not create file, try again: ");
+        scanf("%s", rez_filename);
+        rezfile = fopen(rez_filename, "a");
+    }
 }
 void finding_begin_end(int i, int *first_position, int *last_position, int lenght, char *words)
 {
