@@ -97,7 +97,7 @@ void finding_begin_end(int i, int *first_position, int *last_position, int lengh
             (*first_position) = i;
         }
     }
-    if ((*first_position) >= 0 && (*last_position) < 0) // kol dar nera rasta zodzio pirmos raides vieta
+    if ((*first_position) >= 0 && (*last_position) < 0) // kol dar nera rasta zodzio paskutines raides vieta
     { 
         if (isspace(*(words + i))) // if theres a space or this is the last word
         { 
