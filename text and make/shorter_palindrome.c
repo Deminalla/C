@@ -6,7 +6,7 @@
 void files (FILE *thefile, char *filename, char *format);
 void finding_begin_end(int i, int *first_position, int *last_position, int lenght, char *words);
 void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, int *p_exists, FILE *rezfile);
-void print_results(int k, int *first_position, int *last_position, char *words, int *palindrome, FILE *rezfile);
+void print_results(int k, int first_position, int last_position, char *words, int *palindrome, FILE *rezfile);
 int main()
 {
     FILE *myfile, *rezfile;
@@ -42,6 +42,7 @@ int main()
 
     myfile = fopen(my_filename, "r");
     rezfile = fopen(rez_filename, "a");
+    
     while (fgets(words, 255, myfile) != NULL) // reads 255 symbols each time
     {
         lenght = strlen(words);
@@ -57,13 +58,10 @@ int main()
                 check_palindrome(k, l, &first_position, &last_position, words, &num_letters, &palindrome, &p_exists, rezfile);
                 if (p_exists)
                 {
-                    print_results(k, &first_position, &last_position, words, &palindrome, rezfile);
+                    print_results(k, first_position, last_position, words, &palindrome, rezfile);
                 }
-                else
-                {
-                    first_position = -1;
+                    first_position = -1; // so we can search for the next word, brackets are necessary because pointers are read from right to left
                     last_position = -1;
-                }
             }
         }
     }
@@ -130,18 +128,16 @@ void check_palindrome(int k, int l, int *first_position, int *last_position, cha
         (*p_exists) = 0;
     }
     (*num_letters) = 0;
-}
-void print_results(int k, int *first_position, int *last_position, char *words, int *palindrome, FILE *rezfile)
+
+void print_results(int k, int first_position, int last_position, char *words, int *palindrome, FILE *rezfile)
 {
     if ((*palindrome) == 1)
     {
         fprintf(rezfile, "The palindromes that were found in the file: ");
     }
-    for (k = *first_position; k <= *last_position; k++)
+    for (k = first_position; k <= last_position; k++)
     {
         fprintf(rezfile, "%c", (*(words + k)));
     }
     fprintf(rezfile, " ");
-    (*first_position) = -1; // so we can search for the next word, brackets are necessary because pointers are read from right to left
-    (*last_position) = -1;
 }
