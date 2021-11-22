@@ -45,7 +45,7 @@ int main()
     while (fgets(words, 255, myfile) != NULL) // reads 255 symbols each time
     {
         lenght = strlen(words);
-        if ((*(words + lenght - 1)) != '\n') // if we are reading the line for the first time and it's \n before 255
+        if ((*(words + lenght - 1)) != '\n') // c moves the pointer to the beginning of the next line
         {
             while ((c = fgetc(myfile)) != '\n' && c != EOF); // moves the pointer to the beginning of the next line
         }
