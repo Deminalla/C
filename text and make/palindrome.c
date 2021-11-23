@@ -56,12 +56,6 @@ int main()
             if (first_position >= 0 && last_position >= 0)
             {
                 check_palindrome(k, l, &first_position, &last_position, words, &num_letters, &palindrome, &p_exists, rezfile);
-                if (p_exists)
-                {
-                    print_results(k, first_position, last_position, words, &palindrome, rezfile);
-                }
-                    first_position = -1; // so we can search for the next word, brackets are necessary because pointers are read from right to left
-                    last_position = -1;
             }
         }
     }
@@ -121,21 +115,19 @@ void check_palindrome(int k, int l, int *first_position, int *last_position, cha
     if (*num_letters == (*last_position - *first_position + 1))
     {
         (*palindrome)++;
-        (*p_exists) = 1;
-    }
-    else
-    {
-        (*p_exists) = 0;
+        print_results(k, first_position, last_position, words, palindrome, rezfile);
     }
     (*num_letters) = 0;
-
-void print_results(int k, int first_position, int last_position, char *words, int *palindrome, FILE *rezfile)
+    (*first_position) = -1; // so we can search for the next word, brackets are necessary because pointers are read from right to left
+    (*last_position) = -1;
+}
+void print_results(int k, int *first_position, int *last_position, char *words, int *palindrome, FILE *rezfile) //we need * because it was already a pointer in the previous function
 {
     if ((*palindrome) == 1)
     {
         fprintf(rezfile, "The palindromes that were found in the file: ");
     }
-    for (k = first_position; k <= last_position; k++)
+    for (k = *first_position; k <= *last_position; k++)
     {
         fprintf(rezfile, "%c", (*(words + k)));
     }
