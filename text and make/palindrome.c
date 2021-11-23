@@ -6,7 +6,7 @@
 void files (FILE *thefile, char *filename, char *format);
 void finding_begin_end(int i, int *first_position, int *last_position, int lenght, char *words);
 void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, int *p_exists, FILE *rezfile);
-void print_results(int k, int first_position, int last_position, char *words, int *palindrome, FILE *rezfile);
+void print_results(int k, int *first_position, int *last_position, char *words, int *palindrome, FILE *rezfile);
 int main()
 {
     FILE *myfile, *rezfile;
