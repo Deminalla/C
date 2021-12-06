@@ -78,9 +78,9 @@ void create_list(FILE *list_file) // This function will add the new node to the 
     int value;
     if ((fscanf(list_file, "%d", &value) != EOF))
     {
-        struct Node *new_node = (struct Node *)malloc(sizeof(struct Node)); // Create new node    do i need to free this??
-        new_node->data = value;                                             // assign a value to the new node
-        if (head == NULL)                                                   // If list is empty, both head and tail would point to new node.
+        struct Node *new_node = (struct Node *)malloc(sizeof(struct Node)); // Create new node, we allocate memory if we will give it a value 
+        new_node->data = value;      // assign a value to the new node
+        if (head == NULL)            // If list is empty, both head and tail would point to new node.
         {
             head = new_node;
             tail = new_node;
@@ -102,13 +102,13 @@ void insert()
     int value, criteria;
     new_node_before(&value, &criteria);
 
-    struct Node *new_node, *original; // ill search for original and add new_node before it
+    struct Node *new_node, *original;  //we dont need to allocate memory if we are just going to equalize it to a structure without dirrectly giving it a value
     original = tail->next; // head
 
     if (head->data == criteria)
     {
         found_node = 1;
-        new_node = (struct Node *)malloc(sizeof(struct Node));
+        new_node = (struct Node *)malloc(sizeof(struct Node)); //we allocate memory if we plan on giving it a value (->data)
         new_node->data = value;
         new_node->next = head;
         head = new_node;
