@@ -1,5 +1,17 @@
 /*Sudaryti ciklinį vienpusį sąrašą. Parašyti procedūrą, kuri įterpia prieš reikšme nurodytą elementą naują elementą.
-Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.*/
+Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.
+11:20 - 11:30   10 min for the menu and struct node
+12:20 - 12:40   20 min for display function
+12:30 - 13:20   50 min for creating list
+13:50 - 14:50   1 hour for inserting (at the wrong place goddamiit)
+14:50 - 15:20   30 min for inserting BEFORE a pecific value (failed)
+15:20 - 15:50   30 min for inserting at the beginning of the list
+15:50 - 16:15   25 min for inserting BEFORE a pecific value
+19:25 - 19:40   15 min for recursion
+19:40 - 19:50   10 min for inserting multiple times (if there ar emore than one of the same criteria)
+20:10 - 21:30   1h 20 min for assert
+16:20 - 17:40   1h 20 min for multiple .c files
+*/
 //#define NDEBUG //turns off assert
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,8 +62,6 @@ int main()
         {
             exit(0);
         }
-        else
-            printf("Wrong choice, look at the menu again\n");
     }
     fclose(list_file);
     free(list_file);
