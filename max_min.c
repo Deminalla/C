@@ -12,7 +12,7 @@ int main()
     int N;
 
     printf("Input the size of the table: "); // N*N
-    scanf("%d", N);
+    scanf("%d", &N);
     int number[N + 1][N + 1];
     int decimals[N + 1]; // the number of decimals in a row
     int row, column;
