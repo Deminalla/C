@@ -132,7 +132,7 @@ void insert()
     } while (original != tail->next);
     if (found_node == 0)
     {
-        printf("%d could not be found_node in the list\n", criteria);
+        printf("%d could not be found in the list\n", criteria);
     }
 }
 void display() // no need for parameters, because head, data, next are already global and the only new one (temp) is created inside the function
