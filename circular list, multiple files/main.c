@@ -44,7 +44,6 @@ int main()
         }
         else if (choice == 3)
         {
-            assert(head != NULL); // make sure the list isnt empty
             insert();
         }
         else if (choice == 4)
