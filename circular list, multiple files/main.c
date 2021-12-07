@@ -37,10 +37,17 @@ int main()
         assert(scanf("%d", &choice) == 1 && isspace(getchar()));
         if (choice == 1)
         {
+            if (head!=NULL){ 
+                printf ("1. Delete previous list \n2. Add to previous list \n");
+                printf("Enter your choice: ");
+                assert(scanf("%d", &choice) == 1 && isspace(getchar()));
+                if (choice==1){
+                     head = NULL; //jeigu trinam
+                }
+            }
             read_file(list_file, list_filename); //read.c file
             list_file = fopen(list_filename, "r");
-            head = NULL; // because we create a new list, we need to get rid of the previous one
-            create_list(list_file);
+            create_list(list_file); 
         }
         else if (choice == 2)
         {
