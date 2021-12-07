@@ -16,8 +16,9 @@ struct Node // node is a data that is linked to other nodes
     int data;
     struct Node *next; // each struct node has a data item and a pointer to the next struct node
 };
-struct Node *head = NULL; //gloabl
-struct Node *tail = NULL;
+typedef struct Node Node; //instead of struct Node, I can write Node from now on
+Node *head = NULL; //gloabl
+Node *tail = NULL;
 
 int main()
 {
@@ -63,7 +64,7 @@ void create_list(FILE *list_file) // This function will add the new node to the 
     int value;
     if ((fscanf(list_file, "%d", &value) != EOF))
     {
-        struct Node *new_node = (struct Node *)malloc(sizeof(struct Node)); // Create new node, we allocate memory if we will give it a value 
+        Node *new_node = (Node *)malloc(sizeof(Node)); // Create new node, we allocate memory if we will give it a value 
         assert(new_node != NULL);
         new_node->data = value;      // assign a value to the new node
         if (head == NULL)            // If list is empty, both head and tail would point to new node.
@@ -88,14 +89,14 @@ void insert()
     int value, criteria;
     new_node_before(&value, &criteria); //new_node.c file
 
-    struct Node *new_node, *original;  //we dont need to allocate memory if we are just going to equalize it to a structure without dirrectly giving it a value
+    Node *new_node, *original;  //we dont need to allocate memory if we are just going to equalize it to a structure without dirrectly giving it a value
     assert(new_node != NULL);
     original = tail->next; // head
 
     if (head->data == criteria)
     {
         found_node = 1;
-        new_node = (struct Node *)malloc(sizeof(struct Node)); //we allocate memory if we plan on giving it a value (->data)
+        new_node = (Node *)malloc(sizeof(Node)); //we allocate memory if we plan on giving it a value (->data)
         assert(new_node != NULL);
 
         new_node->data = value;
@@ -111,7 +112,7 @@ void insert()
         if (original->next->data == criteria) // check if the answer after the original list's element is the number, before which we want to put an element
         {
             found_node = 1;
-            new_node = (struct Node *)malloc(sizeof(struct Node));
+            new_node = (Node *)malloc(sizeof(Node));
             assert(new_node != NULL); 
             new_node->data = value;
             new_node->next = original->next; // what comes after original is the same as what comes after the new_node
@@ -133,7 +134,7 @@ void display() // no need for parameters, because head, data, next are already g
     else
     {
         printf("List elements are: \n");
-        struct Node *temp = head; // define a Node pointer 'temp' and initialize with head, temp as in temporary and temp doesnt work outside this else function, its like a very local variable
+        Node *temp = head; // define a Node pointer 'temp' and initialize with head, temp as in temporary and temp doesnt work outside this else function, its like a very local variable
         assert(temp != NULL);
         while (temp->next != head)
         {
