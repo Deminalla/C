@@ -16,7 +16,7 @@ struct Node // node is a data that is linked to other nodes
     int data;
     struct Node *next; // each struct node has a data item and a pointer to the next struct node
 };
-struct Node *head = NULL; //list is empty
+struct Node *head = NULL; //gloabl
 struct Node *tail = NULL;
 
 int main()
