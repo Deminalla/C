@@ -6,7 +6,7 @@ Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.*/
 #include <ctype.h> 
 #include <assert.h>
 #include "read.h" //a header is almost like a library that makes your functions, standard ones. Its just a file that contains your function
-#include "new_node.h"
+#include "insert_node.h"
 void create_list(FILE *list_file);
 void display();
 void insert();
@@ -87,7 +87,7 @@ void insert()
 {
     int found_node = 0;
     int value, criteria;
-    new_node_before(&value, &criteria); //new_node.c file
+    new_node_before(&value, &criteria); //insert_node.c file
 
     Node *new_node, *original;  //we dont need to allocate memory if we are just going to equalize it to a structure without dirrectly giving it a value
     assert(new_node != NULL);
