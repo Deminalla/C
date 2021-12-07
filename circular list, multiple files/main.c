@@ -5,7 +5,7 @@ Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.*/
 #include <stdlib.h>
 #include <ctype.h> 
 #include <assert.h>
-#include "read.h"
+#include "read.h" //a header is almost like a library that makes your functions, standard ones. Its just a file that contains your function
 #include "new_node.h"
 void create_list(FILE *list_file);
 void display();
