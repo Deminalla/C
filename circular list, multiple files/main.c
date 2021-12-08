@@ -7,7 +7,7 @@ Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.*/
 #include <assert.h>
 #include "main.h" //a header is almost like a library that makes your functions, standard ones. Its just a file that contains your function
 void create_list(FILE *list_file);
-void display();
+//void display();
 void insert();
 
 Node *head = NULL; //gloabl
@@ -44,7 +44,7 @@ int main()
         }
         else if (choice == 2)
         {
-            display();
+            display(head, tail);
         }
         else if (choice == 3)
         {
@@ -59,6 +59,7 @@ int main()
     free(list_file);
     return 0;
 }
+
 void create_list(FILE *list_file) // This function will add the new node to the list.
 {
     int value;
@@ -126,6 +127,7 @@ void insert()
         printf("%d could not be found in the list\n", criteria);
     }
 }
+/*
 void display() // no need for parameters, because head, data, next are already global and the only new one (temp) is created inside the function
 {
     if (head == NULL)
@@ -143,4 +145,4 @@ void display() // no need for parameters, because head, data, next are already g
         }
         printf("%d\n", temp->data); // i could also add head -> data then it would also print the first element in the list
     }
-}
+}*/
