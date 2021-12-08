@@ -1,2 +1,5 @@
 compilation: main.c
-	gcc main.c read.c insert_node.c -o pls 
+	gcc main.c read.c node_input.c -o pls 
+
+testing: test.c
+	gcc test.c -o hlp
