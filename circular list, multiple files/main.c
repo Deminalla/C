@@ -5,18 +5,11 @@ Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.*/
 #include <stdlib.h>
 #include <ctype.h> 
 #include <assert.h>
-#include "read.h" //a header is almost like a library that makes your functions, standard ones. Its just a file that contains your function
-#include "insert_node.h"
+#include "main.h" //a header is almost like a library that makes your functions, standard ones. Its just a file that contains your function
 void create_list(FILE *list_file);
 void display();
 void insert();
 
-struct Node // node is a data that is linked to other nodes
-{
-    int data;
-    struct Node *next; // each struct node has a data item and a pointer to the next struct node
-};
-typedef struct Node Node; //instead of struct Node, I can write Node from now on
 Node *head = NULL; //gloabl
 Node *tail = NULL;
 
