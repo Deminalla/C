@@ -25,7 +25,6 @@ void create_list(FILE *list_file, Node **head, Node **tail) // This function wil
             (*tail) = new_node;       // New node will become new tail.
             new_node->next = (*head); // Since, it is circular linked list tail will point to head.
         }
-        assert(((*tail)->next = (*head)) && ((*tail)->data = value)); // make sure its a circular linked list
         create_list(list_file, head, tail);                           // recursion
     }
 }
