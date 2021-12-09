@@ -22,7 +22,9 @@ int main()
     test_create(list_file, value_array);
 
     test_insert(3, 8, value_array); // 3 prieš 8
-
+    
+    free(value_array);
+    fclose(list_file);
     return 0;
 }
 void test_create(FILE *list_file, int *value_array)
