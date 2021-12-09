@@ -6,8 +6,6 @@ Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.*/
 #include <ctype.h> 
 #include <assert.h>
 #include "main.h" //a header is almost like a library that makes your functions, standard ones. Its just a file that contains your function
-void create_list(FILE *list_file);
-//void display();
 void insert();
 
 Node *head = NULL; //gloabl
@@ -40,11 +38,11 @@ int main()
             }
             read_file(list_file, list_filename); //read.c file
             list_file = fopen(list_filename, "r");
-            create_list(list_file); 
+            create_list(list_file, &head, &tail); //create.c file
         }
         else if (choice == 2)
         {
-            display(head, tail);
+            display(head, tail); //display.c file
         }
         else if (choice == 3)
         {
@@ -59,44 +57,17 @@ int main()
     free(list_file);
     return 0;
 }
-
-void create_list(FILE *list_file) // This function will add the new node to the list.
-{
-    int value;
-    if ((fscanf(list_file, "%d", &value) != EOF))
-    {
-        Node *new_node = (Node *)malloc(sizeof(Node)); // Create new node, we allocate memory if we will give it a value 
-        assert(new_node != NULL);
-        new_node->data = value;      // assign a value to the new node
-        if (head == NULL)            // If list is empty, both head and tail would point to new node.
-        {
-            head = new_node;
-            tail = new_node;
-            new_node->next = head;
-        }
-        else
-        {
-            tail->next = new_node; // tail will point to new node.
-            tail = new_node;       // New node will become new tail.
-            tail->next = head;     // Since, it is circular linked list tail will point to head.
-        }
-        assert((tail->next = head) && (tail->data = value)); // make sure its a circular linked list
-        create_list(list_file);    // recursion
-    }
-}
 void insert()
 {
-    int found_node = 0;
-    int value, criteria;
-    new_node_before(&value, &criteria); //insert_node.c file
+    int value, criteria, insertion = 0;
+    new_node_before(&value, &criteria); //node_input.c file
 
     Node *new_node, *original;  //we dont need to allocate memory if we are just going to equalize it to a structure without dirrectly giving it a value
-    assert(new_node != NULL);
     original = tail->next; // head
 
     if (head->data == criteria)
     {
-        found_node = 1;
+        insertion = 1;
         new_node = (Node *)malloc(sizeof(Node)); //we allocate memory if we plan on giving it a value (->data)
         assert(new_node != NULL);
 
@@ -104,15 +75,13 @@ void insert()
         new_node->next = head;
         head = new_node;
         tail->next = new_node;
-        assert(head->data = value);
-        assert(tail->next->data = value);
         original = original->next; // if we already added an element at the front, go forward by 1 more
     }
     do
     {
         if (original->next->data == criteria) // check if the answer after the original list's element is the number, before which we want to put an element
         {
-            found_node = 1;
+            insertion = 1;
             new_node = (Node *)malloc(sizeof(Node));
             assert(new_node != NULL); 
             new_node->data = value;
@@ -122,7 +91,7 @@ void insert()
         }
         original = original->next;
     } while (original != tail->next);
-    if (found_node == 0)
+    if (insertion == 0)
     {
         printf("%d could not be found in the list\n", criteria);
     }
