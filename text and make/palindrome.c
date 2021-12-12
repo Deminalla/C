@@ -65,8 +65,8 @@ int main()
     }
     fclose(myfile);
     fclose(rezfile);
-    free(myfile);
-    free(rezfile);
+    free(my_filename);
+    free(rez_filename);
     free(words);
     return 0;
 }
