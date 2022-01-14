@@ -6,7 +6,7 @@ struct Node
     int data;
     struct Node *next;
 };
-typedef struct Node Node; // update  pridėjau typedef, kaip ir sakėt, tai jau užteks rašyt tik Node vietoj struct Node
+typedef struct Node Node; // from now on struct Node is simply Node
 
 void new_node_before(int *value, int *criteria);             // node_input.c
 void read_file(FILE *list_file, char *list_filename);        // read.c
