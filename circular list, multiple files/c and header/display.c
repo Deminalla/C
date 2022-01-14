@@ -13,9 +13,9 @@ void display(Node *head, Node *tail) // no need for parameters, because head, da
         assert(temp != NULL);
         while (temp->next != head)
         {
-            printf("%d -> ", temp->data); // keep displaying temp → data until temp reaches the last node
+            printf("%d -> ", temp->data); 
             temp = temp->next;
         }
-        printf("%d\n", temp->data); // i could also add head -> data then it would also print the first element in the list
+        printf("%d\n", temp->data); 
     }
 }
