@@ -1,5 +1,4 @@
-/*Sudaryti ciklinį vienpusį sąrašą. Parašyti procedūrą, kuri įterpia prieš reikšme nurodytą elementą naują elementą.
-Jeigu tokio elemento nėra, turi būti išvestas atitinkamas pranešimas.*/
+//Create a singly linked circular list. Write a program, which inserts a new user input value before another user picked value. If such value does not exist, let the user know.
 //#define NDEBUG //turns off assert
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +32,7 @@ int main()
                 printf("Enter your choice: ");
                 assert(scanf("%d", &choice) == 1 && isspace(getchar()));
                 if (choice==1){
-                     head = NULL; //jeigu trinam
+                     head = NULL;
                 }
             }
             read_file(list_file, list_filename); //read.c file
@@ -86,7 +85,7 @@ void insert()
             assert(new_node != NULL); 
             new_node->data = value;
             new_node->next = original->next; // what comes after original is the same as what comes after the new_node
-            original->next = new_node;       // Adding newly allocated node after original
+            original->next = new_node;       // adding newly allocated node after original
             original = original->next;       // if we add an element, go forward by 1 more
         }
         original = original->next;
