@@ -32,7 +32,7 @@ void test_create(FILE *list_file, int *value_array)
     int node_nr = 0;
     while (fscanf(list_file, "%d", (value_array + node_nr)) != EOF) // save all the elements in an array
     {
-        node_nr++; // the amount of elements in file should equal to the nr of list elements
+        node_nr++; // the amount of elements in file should equal to the number of list elements
     }
     int i = 0;
     test_new_node = head;
@@ -46,7 +46,7 @@ void test_insert(int value, int criteria, int *value_array)
 {
     int insertion = 0;
     Node *new_node, *original; // original is the one i created (from the file)
-    original = tail->next;     // head
+    original = tail->next;    
     if (head->data == criteria)
     {
         insertion = 1;
