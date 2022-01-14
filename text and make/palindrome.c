@@ -1,8 +1,8 @@
 // Parašyti funkciją, kuri randa ir atspausdina visus žodžius, kurie vienodai skaitomi iš pradžios ir iš galo
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> //for strlen
-#include <ctype.h>  //for isspace
+#include <string.h> 
+#include <ctype.h>  
 void files (FILE *thefile, char *filename, char *format);
 void finding_begin_end(int i, int *first_position, int *last_position, int lenght, char *words);
 void check_palindrome(int k, int l, int *first_position, int *last_position, char *words, int *num_letters, int *palindrome, int *p_exists, FILE *rezfile);
@@ -16,7 +16,7 @@ int main()
     int i, k, l;
     int lenght;
     int first_position = -1, last_position = -1;
-    int num_letters = 0; // number of letters (skirtumas tarp l ir f) in a word if we count from 0
+    int num_letters = 0; // number of letters (last_position-first_position) in a word if we count from 0
     int palindrome = 0, p_exists = 0;
 
     my_filename = (char *)calloc(100, sizeof(char));
@@ -50,7 +50,7 @@ int main()
         {
             while ((c = fgetc(myfile)) != '\n' && c != EOF); // moves the pointer to the beginning of the next line
         }
-        for (i = 0; i <= lenght - 1; i++) // lenght-1 because we start from
+        for (i = 0; i <= lenght - 1; i++) // lenght-1 because we start from 0
         {
             finding_begin_end(i, &first_position, &last_position, lenght, words);
             if (first_position >= 0 && last_position >= 0)
@@ -82,20 +82,20 @@ void files (FILE *thefile, char *filename, char *format){
 }
 void finding_begin_end(int i, int *first_position, int *last_position, int lenght, char *words)
 {
-    if ((*first_position) < 0) // kol dar nera rasta zodzio pirmos raides vieta
+    if ((*first_position) < 0) // if the first letter hasn't been found
     { 
         if (!isspace(*(words + i)))
         {
             (*first_position) = i;
         }
     }
-    if ((*first_position) >= 0 && (*last_position) < 0) // kol dar nera rasta zodzio paskutines raides vieta
+    if ((*first_position) >= 0 && (*last_position) < 0) // if the last letter of the word hasn't been found yet
     { 
-        if (isspace(*(words + i))) // if theres a space or this is the last word
+        if (isspace(*(words + i))) // if theres a whitespace
         { 
             (*last_position) = i - 1;
         }
-        else if (i == (lenght - 1)) // if the word is the last symbol
+        else if (i == (lenght - 1)) // if the the symbol is the last in the line
         { 
             (*last_position) = i;
         }
