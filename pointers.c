@@ -8,6 +8,9 @@ float divi(float e, float f);
 void greet(char *name);
 void A();
 void B(void (*ptr)()); //B takes function pointer as argument, ptr points to a void function with no arguments
+struct ABC{
+    int x, y;
+};
 int main()
 {
     int a, b, c;
@@ -27,6 +30,12 @@ int main()
     scanf("Whcih function to execute: %d", &choice);
     float (*math[4])(float, float) = {sum, sub, mul, div};
     printf("%f", math[choice](e, f));
+    
+    struct ABC a = {0, 1};
+    struct ABC *p; //p is a pointer to a stuct variable
+    p = &a; 
+    printf ("%d %d", p->x, (*p).y); //0 1  p->x = (*p).x = a.x
+    
     return 0;
 }
 int add(int a, int b){
