@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 int add(int a, int b);
+float sum(float e, float f);
+float sub(float e, float f);
+float mul(float e, float f);
+float divi(float e, float f);
 void greet(char *name);
 void A();
 void B(void (*ptr)()); //B takes function pointer as argument, ptr points to a void function with no arguments
@@ -18,6 +22,11 @@ int main()
 
     void (*t)() = A;
     B(t); //B takes function A as an argument, or simply B(A)
+
+    int choice, e=6, f=2;
+    scanf("Whcih function to execute: %d", &choice);
+    float (*math[4])(float, float) = {sum, sub, mul, div};
+    printf("%f", math[choice](e, f));
     return 0;
 }
 int add(int a, int b){
@@ -31,4 +40,16 @@ void A(){
 }
 void B(void (*ptr)()){
     ptr(); //calls the function it's pointing to
+}
+float sum(float e, float f){
+    return e+f;
+}
+float sub(float e, float f){
+    return e-f;
+}
+float mul(float e, float f){
+    return e*f;
+}
+float divi(float e, float f){
+    return e/f;
 }
