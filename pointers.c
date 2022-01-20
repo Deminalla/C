@@ -19,7 +19,7 @@ int main()
     c = (*p)(3, 2); //or simply p(3, 2)
     printf("c is %d\n", c);
 
-    void (*k)(char*); //if its a void type function
+    void (*k)(char*); //pointer to a void type function
     k = greet; //function address
     k("Jinx"); //execute function
 
