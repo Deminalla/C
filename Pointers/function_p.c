@@ -3,7 +3,7 @@
 int add(int a, int b);
 void greet(char *name);
 void A();
-void B(void (*ptr)()); //B takes functioin pointer as argument, ptr points to a void function with no arguments
+void B(void (*ptr)()); //B takes function pointer as argument, ptr points to a void function with no arguments
 int main()
 {
     int a, b, c;
