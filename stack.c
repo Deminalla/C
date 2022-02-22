@@ -62,7 +62,7 @@ int main()
             else if (choice == 5){
                 printf("Which stack to delete: ");
                 scanf("%d", &j);
-                if (stack[j] >= 1){
+                if (stack[j] >= 1){ //top[j]==NULL should work the same?
                     delete (j, stack);
                 }
                 else{
@@ -94,7 +94,7 @@ int main()
     return 0;
 }
 void push(int j, int stack[], int status[]){
-    if (status[j] != 0 && status[j] ==- 2){
+    if (status[j] != 0 && status[j] == -2){
     int value;
     Node *new_node;
     printf("Enter value: ");
@@ -114,9 +114,9 @@ void push(int j, int stack[], int status[]){
 void pop(int j, int stack[], int status[]){
     if (status[j] != 0 && status[j] == -1){
         printf("%d is out of stack\n", top[j]->data);
+        stack[j]--; //dec stack element nr
         Node* temp;
         temp = top[j];
-        stack[j]--; //dec stack element nr
         top[j] = top[j]->next; //previous element is now top
         free(temp);
     }
@@ -159,7 +159,6 @@ void check(int j, int stack[], int choice2, int status[], int max[]){
             else status[j] = -2; //not full
         }
     }
-    printf("status: %d\n", status[j]); //delete it later
 }
 void delete (int j, int stack[]){
     Node* temp = top[j];
