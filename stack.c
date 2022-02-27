@@ -1,10 +1,7 @@
-// DA
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-
-struct Node
-{
+struct Node{
     int data;
     struct Node *next;
 };
@@ -17,13 +14,11 @@ void display(int j, int stack[], int status[]);
 void check(int j, int stack[], int choice2, int status[], int max[]);
 void delete (int j, int stack[]);
 
-int main()
-{
-    int choice, choice2, value;
-    int status[500];
-    int i = 0, j, limit;
-    int stack[500] = {0};
-    int max[500] = {0};
+int main(){
+    int choice, choice2, value, i = 0, j;
+    int status[500]; //exists, empty, full
+    int stack[500] = {0}; //element nr in each stack
+    int max[500] = {0}; //element limit
 
     while (1){
         printf("\n*********** MENU *************\n");
@@ -31,15 +26,14 @@ int main()
         printf("Enter your choice: ");
         if (scanf("%d", &choice) == 1 && isspace(getchar())){
             if (choice == 1){
-                printf("Enter stack number: ");
+                printf("Which stack to create: ");
                 scanf("%d", &i);
                 if (stack[i] < 1){
                     stack[i] = 1;
                     printf("Enter element limit: ");
-                    scanf("%d", &limit); //how many elements do you want
-                    max[i] = limit;
+                    scanf("%d", &max[i]); //how many elements do you want
                 }
-                else printf("Stack already exists");
+                else printf("Stack already exists\n");
             }
             else if (choice == 2){
                 printf("Which stack to push to: ");
@@ -65,9 +59,7 @@ int main()
                 if (stack[j] >= 1){ //top[j]==NULL should work the same?
                     delete (j, stack);
                 }
-                else{
-                    printf("Such stack does not exist\n");
-                }
+                else printf("Such stack does not exist\n");
             }
             else if (choice == 6){
                 printf("Which stack to check: ");
@@ -122,20 +114,12 @@ void pop(int j, int stack[], int status[]){
     }
 }
 void display(int j, int stack[], int status[]){
-    int choice2;
     if (status[j] != 0 && status[j] == -1){
-    printf("1. Top \n2. Whole stack \nEnter your choice: ");
-    scanf("%d", &choice2);
-        if (choice2==1){
-        printf("%d is top of stack\n", top[j]->data);
-        }
-        else if (choice2==2){
             Node* temp = top[j];
             while (temp != NULL){
             printf("%d\n", temp->data);
             temp = temp->next;
             }
-        }
     }
 }
 void check(int j, int stack[], int choice2, int status[], int max[]){
@@ -163,7 +147,6 @@ void check(int j, int stack[], int choice2, int status[], int max[]){
 void delete (int j, int stack[]){
     Node* temp = top[j];
     Node* next = NULL;
- 
     while (temp != NULL){
         next = temp->next;
         free(temp);
