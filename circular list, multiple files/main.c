@@ -1,4 +1,6 @@
-//Create a singly linked circular list. Write a program, which inserts a new user input value before another user picked value. If such value does not exist, let the user know.
+//Create a singly linked circular list. Write a program, which inserts a new user input value before another user picked value. 
+//If such value does not exist, let the user know.
+
 //#define NDEBUG //turns off assert
 #include <stdio.h>
 #include <stdlib.h>
