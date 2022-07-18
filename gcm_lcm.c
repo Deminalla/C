@@ -3,7 +3,7 @@
 int gcd(int nr1, int nr2);
 int lcm(int nr1, int nr2);
 #include <stdio.h>
-#include <stdlib.h>0
+#include <stdlib.h>
 int main()
 {
     int a, b, c;
